@@ -5,7 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, X, Trophy, Users, Award, Calendar, Phone, Info } from "lucide-react"
+import { Menu, X, Trophy, Users, Award, Phone, Info } from "lucide-react"
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
@@ -25,7 +25,6 @@ export default function Navigation() {
     { href: "/about", label: "About", icon: Info },
     { href: "/officials", label: "Officials", icon: Users },
     { href: "/achievements", label: "Achievements", icon: Award },
-    { href: "/updates", label: "Updates", icon: Calendar },
     { href: "/contact", label: "Contact", icon: Phone },
   ]
 
