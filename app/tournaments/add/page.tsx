@@ -47,6 +47,7 @@ export default function AddTournamentPage() {
         venue: "District Sports Complex",
         date: "2023-12-15",
         image: "/placeholder.svg?height=200&width=300",
+        createdAt: Date.now() - 86400000 * 3, // 3 days ago
       },
       {
         id: 2,
@@ -60,6 +61,7 @@ export default function AddTournamentPage() {
         venue: "Community Ground, Kodavasal",
         date: "2023-10-20",
         image: "/placeholder.svg?height=200&width=300",
+        createdAt: Date.now() - 86400000 * 2, // 2 days ago
       },
       {
         id: 3,
@@ -73,6 +75,7 @@ export default function AddTournamentPage() {
         venue: "Youth Training Center",
         date: "2023-08-10",
         image: "/placeholder.svg?height=200&width=300",
+        createdAt: Date.now() - 86400000, // 1 day ago
       },
     ]
 
@@ -122,16 +125,19 @@ export default function AddTournamentPage() {
     let updatedTournaments
 
     if (editingId) {
-      // Edit existing tournament
+      // Edit existing tournament - keep original createdAt
       updatedTournaments = tournaments.map((t: any) =>
-        t.id === editingId ? { ...formData, id: editingId, image: "/placeholder.svg?height=200&width=300" } : t,
+        t.id === editingId
+          ? { ...formData, id: editingId, image: "/placeholder.svg?height=200&width=300", createdAt: t.createdAt }
+          : t,
       )
     } else {
-      // Add new tournament
+      // Add new tournament - add current timestamp as createdAt
       const newTournament = {
         ...formData,
         id: Date.now(),
         image: "/placeholder.svg?height=200&width=300",
+        createdAt: Date.now(), // This ensures new tournaments appear at the top
       }
       updatedTournaments = [...tournaments, newTournament]
     }

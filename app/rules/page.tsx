@@ -1,92 +1,41 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Clock, Users, Target, Trophy, Heart, Globe, Zap, BookOpen, Flag, Shield } from "lucide-react"
-import Image from "next/image"
+import { Users, Target, Trophy, Clock, Flag, Shield, Zap, ArrowRight, BookOpen } from "lucide-react"
 import Link from "next/link"
 
-export default function AboutPage() {
+export default function RulesPage() {
   return (
     <div className="min-h-screen py-20">
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-br from-orange-50 via-red-50 to-yellow-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-orange-100 text-orange-800">Traditional Heritage</Badge>
+            <Badge className="mb-4 bg-orange-100 text-orange-800">Game Guide</Badge>
             <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
-              About Atya Patya
+              Atya Patya Rules
             </h1>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-              Discover the rich history, cultural significance, and gameplay of Tamil Nadu's beloved traditional sport
+              Master the ancient art of Atya Patya with our comprehensive guide to rules, strategies, and gameplay
             </p>
           </div>
         </div>
       </section>
 
-      {/* History Section */}
+      {/* Court Layout */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold mb-6 text-gray-800">Ancient Origins</h2>
-              <div className="space-y-6">
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  Atya Patya, also known as "Hadudu" in some regions, is an ancient contact sport that originated in the
-                  Indian subcontinent over 4,000 years ago. The game has deep roots in Tamil culture and has been played
-                  in the villages of Tiruvalur district for generations.
-                </p>
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  The name "Atya Patya" comes from the Tamil words meaning "to attack" and "to defend," perfectly
-                  capturing the essence of this strategic team sport that requires both physical prowess and mental
-                  agility.
-                </p>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-orange-50 p-4 rounded-lg">
-                    <Clock className="h-8 w-8 text-orange-500 mb-2" />
-                    <h4 className="font-semibold text-gray-800">4000+ Years</h4>
-                    <p className="text-sm text-gray-600">Ancient Heritage</p>
-                  </div>
-                  <div className="bg-red-50 p-4 rounded-lg">
-                    <Globe className="h-8 w-8 text-red-500 mb-2" />
-                    <h4 className="font-semibold text-gray-800">Regional Sport</h4>
-                    <p className="text-sm text-gray-600">Tamil Tradition</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="relative">
-              <Image
-                src="/placeholder.svg?height=500&width=600"
-                alt="Historical Atya Patya"
-                width={600}
-                height={500}
-                className="rounded-lg shadow-2xl"
-              />
-              <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-lg shadow-lg">
-                <Heart className="h-8 w-8 text-red-500 mb-2" />
-                <p className="font-semibold text-gray-800">Cultural Pride</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Rules Section */}
-      <section id="rules" className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-blue-100 text-blue-800">Game Guide</Badge>
-            <h2 className="text-4xl font-bold mb-6 text-gray-800">Game Rules & Gameplay</h2>
+            <h2 className="text-4xl font-bold mb-6 text-gray-800">The Atya Patya Court</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Understanding the strategic depth and excitement of Atya Patya
+              Understanding the playing field is essential for mastering the game
             </p>
           </div>
 
-          {/* Court Layout */}
-          <div className="max-w-6xl mx-auto mb-16">
+          <div className="max-w-6xl mx-auto">
             <Card className="overflow-hidden shadow-2xl">
               <CardHeader className="bg-gradient-to-r from-orange-500 to-red-500 text-white">
-                <CardTitle className="text-2xl text-center">The Atya Patya Court</CardTitle>
+                <CardTitle className="text-2xl text-center">Official Court Dimensions</CardTitle>
               </CardHeader>
               <CardContent className="p-8">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -133,6 +82,12 @@ export default function AboutPage() {
                         <div className="absolute -bottom-8 left-0 right-0 text-center text-sm font-semibold text-gray-700">
                           13m × 10m
                         </div>
+                        <div className="absolute top-1/2 -left-12 transform -translate-y-1/2 -rotate-90 text-sm font-semibold text-gray-700">
+                          10m
+                        </div>
+                        <div className="absolute top-1/2 -right-12 transform -translate-y-1/2 rotate-90 text-sm font-semibold text-gray-700">
+                          10m
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -173,57 +128,106 @@ export default function AboutPage() {
                           <p className="text-gray-600">Divides court into two equal halves</p>
                         </div>
                       </div>
+
+                      <div className="flex items-center p-4 bg-blue-50 rounded-lg">
+                        <div className="w-4 h-4 bg-blue-500 rounded-full mr-4"></div>
+                        <div>
+                          <h4 className="font-semibold text-gray-800">Surface</h4>
+                          <p className="text-gray-600">Soft soil or mat surface</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </CardContent>
             </Card>
           </div>
+        </div>
+      </section>
 
-          {/* Basic Rules */}
+      {/* Basic Rules */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-6 text-gray-800">Basic Game Rules</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Essential rules every player must know to participate in Atya Patya
+            </p>
+          </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
                 icon: Users,
                 title: "Team Formation",
-                description: "Two teams of 7 players each, with specific roles for raiders and defenders",
-                details: ["1 Raider at a time", "6 Defenders", "Strategic positioning"],
+                description: "Two teams of 7 players each compete against one another",
+                details: [
+                  "7 players per team on court",
+                  "Up to 5 substitute players",
+                  "One team raids, other defends",
+                  "Teams switch roles each half",
+                ],
                 color: "orange",
               },
               {
                 icon: Target,
-                title: "Objective",
-                description: "Raiders must touch opponents and return to their half while holding breath",
-                details: ["Tag opponents", "Return safely", "Continuous chanting"],
+                title: "Raiding Objective",
+                description: "Raiders must tag opponents and return to their half safely",
+                details: [
+                  "One raider enters opponent's half",
+                  "Must chant 'Kabaddi' continuously",
+                  "Tag as many defenders as possible",
+                  "Return to own half without being tackled",
+                ],
                 color: "red",
               },
               {
+                icon: Shield,
+                title: "Defending Strategy",
+                description: "Defenders work together to tackle and stop the raider",
+                details: [
+                  "Prevent raider from returning",
+                  "Use teamwork to tackle",
+                  "Stay within court boundaries",
+                  "Coordinate defensive moves",
+                ],
+                color: "blue",
+              },
+              {
                 icon: Trophy,
-                title: "Scoring",
+                title: "Scoring System",
                 description: "Points awarded for successful raids and defensive tackles",
-                details: ["1 point per tag", "Bonus for all-out", "Time-based rounds"],
+                details: [
+                  "1 point per tagged defender",
+                  "1 point for successful tackle",
+                  "2 points for 'All Out' bonus",
+                  "Match decided by total points",
+                ],
                 color: "green",
               },
               {
                 icon: Clock,
                 title: "Time Rules",
                 description: "Matches are played in two halves with specific time limits",
-                details: ["Two halves of 20 minutes", "5-minute break", "30-second raid limit"],
+                details: [
+                  "Two halves of 20 minutes each",
+                  "5-minute break between halves",
+                  "30-second time limit per raid",
+                  "Teams switch sides at halftime",
+                ],
                 color: "purple",
               },
               {
                 icon: Flag,
                 title: "Boundary Rules",
                 description: "Players must stay within designated court boundaries",
-                details: ["Stepping out eliminates", "Cross baulk line", "Boundary lines count"],
+                details: [
+                  "Stepping out results in elimination",
+                  "Raider must cross baulk line",
+                  "Defenders can't cross center line",
+                  "Boundary lines are part of court",
+                ],
                 color: "yellow",
-              },
-              {
-                icon: Shield,
-                title: "Defending Strategy",
-                description: "Defenders work together to tackle and stop the raider",
-                details: ["Prevent return", "Use teamwork", "Stay in bounds"],
-                color: "blue",
               },
             ].map((rule, index) => (
               <Card key={index} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
@@ -245,9 +249,20 @@ export default function AboutPage() {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Advanced Rules */}
-          <div className="grid lg:grid-cols-2 gap-12 mt-16">
+      {/* Advanced Rules */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-6 text-gray-800">Advanced Rules & Techniques</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Master these advanced concepts to excel in competitive Atya Patya
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-12">
             <Card className="shadow-xl">
               <CardHeader className="bg-gradient-to-r from-orange-500 to-red-500 text-white">
                 <CardTitle className="text-2xl flex items-center">
@@ -332,54 +347,85 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Cultural Significance */}
-      <section className="py-20 bg-white">
+      {/* Officials and Equipment */}
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-6 text-gray-800">Cultural Significance in Tiruvalur</h2>
-              <p className="text-xl text-gray-600">
-                More than just a game - a celebration of community, tradition, and Tamil heritage
-              </p>
-            </div>
+          <div className="grid lg:grid-cols-2 gap-12">
+            <Card className="shadow-xl">
+              <CardHeader className="bg-orange-50">
+                <CardTitle className="text-2xl text-gray-800">Match Officials</CardTitle>
+              </CardHeader>
+              <CardContent className="p-8">
+                <div className="space-y-4">
+                  <div className="flex items-center p-4 bg-white rounded-lg shadow-sm">
+                    <div className="w-3 h-3 bg-orange-500 rounded-full mr-4"></div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800">Referee</h4>
+                      <p className="text-sm text-gray-600">Main official who controls the match</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center p-4 bg-white rounded-lg shadow-sm">
+                    <div className="w-3 h-3 bg-red-500 rounded-full mr-4"></div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800">Umpires (2)</h4>
+                      <p className="text-sm text-gray-600">Assist referee and watch for violations</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center p-4 bg-white rounded-lg shadow-sm">
+                    <div className="w-3 h-3 bg-blue-500 rounded-full mr-4"></div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800">Scorer</h4>
+                      <p className="text-sm text-gray-600">Maintains official score record</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center p-4 bg-white rounded-lg shadow-sm">
+                    <div className="w-3 h-3 bg-green-500 rounded-full mr-4"></div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800">Timekeeper</h4>
+                      <p className="text-sm text-gray-600">Manages match timing and breaks</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-6">
-                <Card className="p-6 border-l-4 border-orange-500">
-                  <h3 className="text-xl font-semibold mb-3 text-gray-800">Community Bonding</h3>
-                  <p className="text-gray-700">
-                    Atya Patya serves as a powerful tool for bringing together people from different villages, fostering
-                    unity and friendship across Tiruvalur district.
-                  </p>
-                </Card>
-
-                <Card className="p-6 border-l-4 border-red-500">
-                  <h3 className="text-xl font-semibold mb-3 text-gray-800">Festival Integration</h3>
-                  <p className="text-gray-700">
-                    The game is an integral part of local festivals and celebrations, with major tournaments coinciding
-                    with harvest festivals and religious occasions.
-                  </p>
-                </Card>
-              </div>
-
-              <div className="space-y-6">
-                <Card className="p-6 border-l-4 border-yellow-500">
-                  <h3 className="text-xl font-semibold mb-3 text-gray-800">Youth Development</h3>
-                  <p className="text-gray-700">
-                    The sport plays a crucial role in developing physical fitness, mental toughness, and leadership
-                    qualities among the youth of Tiruvalur.
-                  </p>
-                </Card>
-
-                <Card className="p-6 border-l-4 border-green-500">
-                  <h3 className="text-xl font-semibold mb-3 text-gray-800">Cultural Preservation</h3>
-                  <p className="text-gray-700">
-                    By maintaining and promoting Atya Patya, Tiruvalur district preserves an important aspect of Tamil
-                    cultural heritage for future generations.
-                  </p>
-                </Card>
-              </div>
-            </div>
+            <Card className="shadow-xl">
+              <CardHeader className="bg-red-50">
+                <CardTitle className="text-2xl text-gray-800">Equipment & Attire</CardTitle>
+              </CardHeader>
+              <CardContent className="p-8">
+                <div className="space-y-4">
+                  <div className="flex items-center p-4 bg-white rounded-lg shadow-sm">
+                    <div className="w-3 h-3 bg-orange-500 rounded-full mr-4"></div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800">Playing Kit</h4>
+                      <p className="text-sm text-gray-600">Shorts, sleeveless shirt, and sports shoes</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center p-4 bg-white rounded-lg shadow-sm">
+                    <div className="w-3 h-3 bg-red-500 rounded-full mr-4"></div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800">Court Surface</h4>
+                      <p className="text-sm text-gray-600">Soft soil or specialized mat</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center p-4 bg-white rounded-lg shadow-sm">
+                    <div className="w-3 h-3 bg-blue-500 rounded-full mr-4"></div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800">Boundary Markers</h4>
+                      <p className="text-sm text-gray-600">Clear lines marking court boundaries</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center p-4 bg-white rounded-lg shadow-sm">
+                    <div className="w-3 h-3 bg-green-500 rounded-full mr-4"></div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800">Scoreboard</h4>
+                      <p className="text-sm text-gray-600">Displays current score and time</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -387,10 +433,9 @@ export default function AboutPage() {
       {/* Call to Action */}
       <section className="py-20 bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-6 text-white">Ready to Experience Atya Patya?</h2>
+          <h2 className="text-4xl font-bold mb-6 text-white">Ready to Play Atya Patya?</h2>
           <p className="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
-            Now that you know about our rich heritage and game rules, join the community and be part of this amazing
-            traditional sport!
+            Now that you know the rules, join a local team or tournament to experience this amazing traditional sport!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact">
@@ -409,6 +454,7 @@ export default function AboutPage() {
                 className="border-white text-white hover:bg-white hover:text-orange-600 px-8 py-3 rounded-full transform hover:scale-105 transition-all duration-300"
               >
                 View Tournaments
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>

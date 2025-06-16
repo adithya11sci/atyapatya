@@ -1,11 +1,112 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Play, Users, Trophy, Calendar, MapPin, ArrowRight } from "lucide-react"
+import { Users, Trophy, Calendar, MapPin, BookOpen } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import ImageCarousel from "./components/ImageCarousel"
 
 export default function HomePage() {
+  const [recentTournaments, setRecentTournaments] = useState([
+    {
+      id: 1,
+      name: "Annual District Championship",
+      year: "2023",
+      winner: "Thiruthuraipoondi Warriors",
+      runnerUp: "Mannargudi Fighters",
+      thirdPlace: "Kodavasal Champions",
+      participants: 24,
+      description: "The biggest tournament of the year featuring teams from across Tiruvalur district",
+      venue: "District Sports Complex",
+      date: "2023-12-15",
+      image: "/placeholder.svg?height=200&width=300",
+      createdAt: Date.now() - 86400000 * 3, // 3 days ago
+    },
+    {
+      id: 2,
+      name: "Inter-Village Tournament",
+      year: "2023",
+      winner: "Kodavasal Champions",
+      runnerUp: "Needamangalam Eagles",
+      thirdPlace: "Vedaranyam Juniors",
+      participants: 16,
+      description: "Traditional village-level competition promoting grassroots participation",
+      venue: "Community Ground, Kodavasal",
+      date: "2023-10-20",
+      image: "/placeholder.svg?height=200&width=300",
+      createdAt: Date.now() - 86400000 * 2, // 2 days ago
+    },
+    {
+      id: 3,
+      name: "Youth League Championship",
+      year: "2023",
+      winner: "Tiruvalur Young Tigers",
+      runnerUp: "Vedaranyam Juniors",
+      thirdPlace: "Mannargudi Youth",
+      participants: 20,
+      description: "Dedicated tournament for young players under 18 years",
+      venue: "Youth Training Center",
+      date: "2023-08-10",
+      image: "/placeholder.svg?height=200&width=300",
+      createdAt: Date.now() - 86400000, // 1 day ago
+    },
+  ])
+
+  // Load tournaments from localStorage on component mount
+  useEffect(() => {
+    const savedTournaments = localStorage.getItem("tournaments")
+    if (savedTournaments) {
+      const parsedTournaments = JSON.parse(savedTournaments)
+      if (parsedTournaments.length > 0) {
+        // Sort by createdAt timestamp (newest added first), fallback to id for older tournaments
+        const sortedTournaments = parsedTournaments.sort((a, b) => {
+          // If both have createdAt, sort by that
+          if (a.createdAt && b.createdAt) {
+            return b.createdAt - a.createdAt
+          }
+          // If only one has createdAt, prioritize it
+          if (a.createdAt && !b.createdAt) return -1
+          if (!a.createdAt && b.createdAt) return 1
+          // If neither has createdAt, sort by id (newer ids are larger)
+          return b.id - a.id
+        })
+        setRecentTournaments(sortedTournaments.slice(0, 3))
+      }
+    }
+  }, [])
+
+  // Listen for tournament updates
+  useEffect(() => {
+    const handleTournamentsUpdate = () => {
+      const savedTournaments = localStorage.getItem("tournaments")
+      if (savedTournaments) {
+        const parsedTournaments = JSON.parse(savedTournaments)
+        // Sort by createdAt timestamp (newest added first), fallback to id for older tournaments
+        const sortedTournaments = parsedTournaments.sort((a, b) => {
+          // If both have createdAt, sort by that
+          if (a.createdAt && b.createdAt) {
+            return b.createdAt - a.createdAt
+          }
+          // If only one has createdAt, prioritize it
+          if (a.createdAt && !b.createdAt) return -1
+          if (!a.createdAt && b.createdAt) return 1
+          // If neither has createdAt, sort by id (newer ids are larger)
+          return b.id - a.id
+        })
+        setRecentTournaments(sortedTournaments.slice(0, 3))
+      }
+    }
+
+    window.addEventListener("tournamentsUpdated", handleTournamentsUpdate)
+
+    return () => {
+      window.removeEventListener("tournamentsUpdated", handleTournamentsUpdate)
+    }
+  }, [])
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -23,21 +124,15 @@ export default function HomePage() {
               Discover the ancient sport that unites communities across Tiruvalur district
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-3 rounded-full transform hover:scale-105 transition-all duration-300"
-              >
-                <Play className="mr-2 h-5 w-5" />
-                Watch Highlights
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-orange-500 text-orange-600 hover:bg-orange-50 px-8 py-3 rounded-full transform hover:scale-105 transition-all duration-300"
-              >
-                Learn the Rules
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <Link href="/about#rules">
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-3 rounded-full transform hover:scale-105 transition-all duration-300"
+                >
+                  <BookOpen className="mr-2 h-5 w-5" />
+                  Learn the Rules
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -115,60 +210,106 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Latest Updates */}
+      {/* Image Carousel */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800">Latest Updates</h2>
-            <p className="text-xl text-gray-600">Stay informed about upcoming tournaments and community events</p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800">Atya Patya Gallery</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Experience the excitement and tradition of Atya Patya through these captivating moments
+            </p>
+          </div>
+
+          <div className="max-w-6xl mx-auto">
+            <ImageCarousel />
+          </div>
+        </div>
+      </section>
+
+      {/* Recent Tournament Results */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800">Recent Tournament Results</h2>
+            <p className="text-xl text-gray-600">Latest championship outcomes and competitive highlights</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Annual Championship 2024",
-                date: "March 15, 2024",
-                excerpt: "Registration now open for the biggest Atya Patya tournament of the year.",
-                image: "/placeholder.svg?height=200&width=300",
-              },
-              {
-                title: "Youth Training Program",
-                date: "February 28, 2024",
-                excerpt: "New coaching initiative to train the next generation of players.",
-                image: "/placeholder.svg?height=200&width=300",
-              },
-              {
-                title: "Cultural Festival Integration",
-                date: "February 20, 2024",
-                excerpt: "Atya Patya featured prominently in Tiruvalur's cultural celebrations.",
-                image: "/placeholder.svg?height=200&width=300",
-              },
-            ].map((update, index) => (
+            {recentTournaments.slice(0, 3).map((tournament, index) => (
               <Card
-                key={index}
-                className="overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+                key={tournament.id}
+                className={`overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 ${
+                  index === 0 ? "ring-2 ring-orange-200 bg-gradient-to-br from-orange-50 to-white" : ""
+                }`}
               >
                 <div className="relative">
                   <Image
-                    src={update.image || "/placeholder.svg"}
-                    alt={update.title}
+                    src={tournament.image || "/placeholder.svg"}
+                    alt={tournament.name}
                     width={300}
                     height={200}
                     className="w-full h-48 object-cover"
                   />
                   <div className="absolute top-4 right-4">
-                    <Badge className="bg-orange-500 text-white">{update.date}</Badge>
+                    <Badge className="bg-orange-500 text-white">{tournament.year}</Badge>
                   </div>
+                  <div className="absolute bottom-4 left-4">
+                    <Badge className="bg-black/70 text-white">{tournament.participants} Teams</Badge>
+                  </div>
+                  <div className="absolute top-4 left-4">
+                    <Badge className="bg-green-500 text-white">
+                      {new Date(tournament.date).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </Badge>
+                  </div>
+                  {index === 0 && (
+                    <div className="absolute top-4 right-20">
+                      <Badge className="bg-blue-500 text-white animate-pulse">Latest</Badge>
+                    </div>
+                  )}
                 </div>
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-3 text-gray-800">{update.title}</h3>
-                  <p className="text-gray-600 mb-4">{update.excerpt}</p>
-                  <Link
-                    href="/updates"
-                    className="text-orange-600 hover:text-orange-700 font-medium inline-flex items-center"
-                  >
-                    Read More
-                    <ArrowRight className="ml-1 h-4 w-4" />
+                  <h3 className="text-xl font-semibold mb-4 text-gray-800">{tournament.name}</h3>
+
+                  <div className="mb-4">
+                    <p className="text-sm text-gray-600 mb-2">
+                      <strong>Venue:</strong> {tournament.venue}
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      <strong>Date:</strong>{" "}
+                      {new Date(tournament.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </p>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-600">Winner:</span>
+                      <span className="font-semibold text-orange-600">{tournament.winner}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-600">Runner-up:</span>
+                      <span className="font-medium text-gray-700">{tournament.runnerUp}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-600">Third Place:</span>
+                      <span className="font-medium text-gray-700">{tournament.thirdPlace}</span>
+                    </div>
+                  </div>
+
+                  <Link href="/achievements">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full mt-4 border-orange-500 text-orange-600 hover:bg-orange-50"
+                    >
+                      View All Results
+                    </Button>
                   </Link>
                 </CardContent>
               </Card>

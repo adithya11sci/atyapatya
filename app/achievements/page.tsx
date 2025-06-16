@@ -4,9 +4,8 @@ import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Trophy, Medal, Star, Calendar, Users, Target, Award, Crown, Plus } from "lucide-react"
+import { Trophy, Medal, Star, Calendar, Users, Target, Award, Crown } from "lucide-react"
 import Image from "next/image"
-import Link from "next/link"
 
 export default function AchievementsPage() {
   const [majorAchievements, setMajorAchievements] = useState([
@@ -19,6 +18,7 @@ export default function AchievementsPage() {
       icon: "Crown",
       color: "text-yellow-500",
       bgColor: "bg-yellow-50",
+      image: "",
     },
     {
       id: 2,
@@ -29,6 +29,7 @@ export default function AchievementsPage() {
       icon: "Star",
       color: "text-blue-500",
       bgColor: "bg-blue-50",
+      image: "",
     },
     {
       id: 3,
@@ -39,6 +40,7 @@ export default function AchievementsPage() {
       icon: "Award",
       color: "text-purple-500",
       bgColor: "bg-purple-50",
+      image: "",
     },
     {
       id: 4,
@@ -49,6 +51,7 @@ export default function AchievementsPage() {
       icon: "Medal",
       color: "text-green-500",
       bgColor: "bg-green-50",
+      image: "",
     },
   ])
 
@@ -65,6 +68,7 @@ export default function AchievementsPage() {
       venue: "District Sports Complex",
       date: "2023-12-15",
       image: "/placeholder.svg?height=200&width=300",
+      createdAt: Date.now() - 86400000 * 3, // 3 days ago
     },
     {
       id: 2,
@@ -78,6 +82,7 @@ export default function AchievementsPage() {
       venue: "Community Ground, Kodavasal",
       date: "2023-10-20",
       image: "/placeholder.svg?height=200&width=300",
+      createdAt: Date.now() - 86400000 * 2, // 2 days ago
     },
     {
       id: 3,
@@ -91,6 +96,7 @@ export default function AchievementsPage() {
       venue: "Youth Training Center",
       date: "2023-08-10",
       image: "/placeholder.svg?height=200&width=300",
+      createdAt: Date.now() - 86400000, // 1 day ago
     },
   ])
 
@@ -198,17 +204,9 @@ export default function AchievementsPage() {
       {/* Tournament Results */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-16">
-            <div className="text-center flex-1">
-              <h2 className="text-4xl font-bold mb-6 text-gray-800">Recent Tournament Results</h2>
-              <p className="text-xl text-gray-600">Latest championship outcomes and competitive highlights</p>
-            </div>
-            <Link href="/tournaments/add">
-              <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-6 py-3 rounded-full transform hover:scale-105 transition-all duration-300">
-                <Plus className="h-5 w-5 mr-2" />
-                Add Tournament
-              </Button>
-            </Link>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-6 text-gray-800">Recent Tournament Results</h2>
+            <p className="text-xl text-gray-600">Latest championship outcomes and competitive highlights</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -267,19 +265,11 @@ export default function AchievementsPage() {
       {/* Major Achievements */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-16">
-            <div className="text-center flex-1">
-              <h2 className="text-4xl font-bold mb-6 text-gray-800">Major Achievements</h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Landmark accomplishments that define our journey in Atya Patya excellence
-              </p>
-            </div>
-            <Link href="/achievements/add">
-              <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-6 py-3 rounded-full transform hover:scale-105 transition-all duration-300">
-                <Plus className="h-5 w-5 mr-2" />
-                Add Achievement
-              </Button>
-            </Link>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-6 text-gray-800">Major Achievements</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Landmark accomplishments that define our journey in Atya Patya excellence
+            </p>
           </div>
 
           <div
@@ -292,6 +282,17 @@ export default function AchievementsPage() {
                   key={achievement.id}
                   className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden"
                 >
+                  {achievement.image && (
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={achievement.image || "/placeholder.svg"}
+                        alt={achievement.title}
+                        width={400}
+                        height={200}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  )}
                   <CardHeader
                     className={`${achievement.bgColor} group-hover:scale-105 transition-transform duration-300`}
                   >
@@ -325,7 +326,15 @@ export default function AchievementsPage() {
           <p className="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
             Join the legacy of champions and contribute to the rich tradition of Atya Patya in Tiruvalur
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center"></div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              size="lg"
+              variant="secondary"
+              className="bg-white text-orange-600 hover:bg-orange-50 px-8 py-3 rounded-full transform hover:scale-105 transition-all duration-300"
+            >
+              Join Our Community
+            </Button>
+          </div>
         </div>
       </section>
     </div>
