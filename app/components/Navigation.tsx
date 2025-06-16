@@ -47,9 +47,8 @@ export default function Navigation() {
             </div>
             <div className="hidden sm:block">
               <h1 className="text-xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
-                Atya Patya
+                Atya Patya - Tiruvalur District
               </h1>
-              <p className="text-xs text-gray-600">Tiruvalur District</p>
             </div>
           </Link>
 
@@ -73,13 +72,6 @@ export default function Navigation() {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden lg:block">
-            <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-6 py-2 rounded-full transform hover:scale-105 transition-all duration-300">
-              Join Tournament
-            </Button>
-          </div>
-
           {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="lg:hidden">
@@ -94,8 +86,7 @@ export default function Navigation() {
                     <Trophy className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <h2 className="font-bold text-gray-800">Atya Patya</h2>
-                    <p className="text-xs text-gray-600">Tiruvalur</p>
+                    <h2 className="font-bold text-gray-800">Atya Patya - Tiruvalur</h2>
                   </div>
                 </div>
                 <Button variant="ghost" size="sm" onClick={() => setIsOpen(false)}>
@@ -117,12 +108,6 @@ export default function Navigation() {
                     <span className="font-medium">{item.label}</span>
                   </Link>
                 ))}
-              </div>
-
-              <div className="mt-8 pt-8 border-t border-gray-200">
-                <Button className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white py-3 rounded-lg">
-                  Join Tournament
-                </Button>
               </div>
             </SheetContent>
           </Sheet>

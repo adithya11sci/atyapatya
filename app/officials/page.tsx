@@ -83,14 +83,14 @@ export default function OfficialsPage() {
   return (
     <div className="min-h-screen py-20">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-orange-50 via-red-50 to-yellow-50">
+      <section className="relative py-12 bg-gradient-to-br from-orange-50 via-red-50 to-yellow-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8">
             <Badge className="mb-4 bg-orange-100 text-orange-800">Leadership Team</Badge>
             <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
               Our Officials
             </h1>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed">
               Meet the dedicated professionals who govern, promote, and develop Atya Patya in Tiruvalur district
             </p>
           </div>
@@ -174,58 +174,7 @@ export default function OfficialsPage() {
         </div>
       </section>
 
-      {/* Department Structure */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-6 text-gray-800">Organizational Structure</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Understanding the administrative framework that supports Atya Patya in Tiruvalur
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                icon: Users,
-                title: "District Administration",
-                description: "Overall governance and policy implementation",
-                count: "3 Officials",
-              },
-              {
-                icon: Award,
-                title: "Sports Council",
-                description: "Tournament organization and athlete development",
-                count: "5 Members",
-              },
-              {
-                icon: Calendar,
-                title: "Event Management",
-                description: "Competition scheduling and venue coordination",
-                count: "4 Coordinators",
-              },
-              {
-                icon: MapPin,
-                title: "Regional Representatives",
-                description: "Village-level coordination and outreach",
-                count: "12 Representatives",
-              },
-            ].map((dept, index) => (
-              <Card
-                key={index}
-                className="text-center p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2"
-              >
-                <CardContent className="p-0">
-                  <dept.icon className="h-12 w-12 mx-auto mb-4 text-orange-500" />
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">{dept.title}</h3>
-                  <p className="text-gray-600 text-sm mb-3">{dept.description}</p>
-                  <Badge className="bg-orange-100 text-orange-800">{dept.count}</Badge>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      
 
       {/* Contact Information */}
       <section className="py-20 bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500">
@@ -243,13 +192,7 @@ export default function OfficialsPage() {
               >
                 Contact District Office
               </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-orange-600 px-8 py-3 rounded-full"
-              >
-                Schedule Meeting
-              </Button>
+              
             </div>
           </div>
         </div>

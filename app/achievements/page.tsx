@@ -1,113 +1,155 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Trophy, Medal, Star, Calendar, Users, Target, Award, Crown } from "lucide-react"
+import { Trophy, Medal, Star, Calendar, Users, Target, Award, Crown, Plus } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function AchievementsPage() {
-  const majorAchievements = [
+  const [majorAchievements, setMajorAchievements] = useState([
     {
+      id: 1,
       year: "2023",
       title: "State Championship Victory",
       description: "Tiruvalur district team won the Tamil Nadu State Atya Patya Championship",
       category: "Team Achievement",
-      icon: Crown,
+      icon: "Crown",
       color: "text-yellow-500",
       bgColor: "bg-yellow-50",
     },
     {
+      id: 2,
       year: "2022",
       title: "Youth Development Excellence",
       description: "Recognized for outstanding youth training programs by Tamil Nadu Sports Authority",
       category: "Program Recognition",
-      icon: Star,
+      icon: "Star",
       color: "text-blue-500",
       bgColor: "bg-blue-50",
     },
     {
+      id: 3,
       year: "2021",
       title: "Cultural Heritage Award",
       description: "Honored for preserving and promoting traditional sports culture",
       category: "Cultural Impact",
-      icon: Award,
+      icon: "Award",
       color: "text-purple-500",
       bgColor: "bg-purple-50",
     },
     {
+      id: 4,
       year: "2020",
       title: "Community Engagement Medal",
       description: "Outstanding contribution to rural sports development during pandemic",
       category: "Social Impact",
-      icon: Medal,
+      icon: "Medal",
       color: "text-green-500",
       bgColor: "bg-green-50",
     },
-  ]
+  ])
 
-  const tournaments = [
+  const [tournaments, setTournaments] = useState([
     {
+      id: 1,
       name: "Annual District Championship",
       year: "2023",
       winner: "Thiruthuraipoondi Warriors",
       runnerUp: "Mannargudi Fighters",
+      thirdPlace: "Kodavasal Champions",
       participants: 24,
-      prize: "₹50,000",
+      description: "The biggest tournament of the year featuring teams from across Tiruvalur district",
+      venue: "District Sports Complex",
+      date: "2023-12-15",
       image: "/placeholder.svg?height=200&width=300",
     },
     {
+      id: 2,
       name: "Inter-Village Tournament",
       year: "2023",
       winner: "Kodavasal Champions",
       runnerUp: "Needamangalam Eagles",
+      thirdPlace: "Vedaranyam Juniors",
       participants: 16,
-      prize: "₹25,000",
+      description: "Traditional village-level competition promoting grassroots participation",
+      venue: "Community Ground, Kodavasal",
+      date: "2023-10-20",
       image: "/placeholder.svg?height=200&width=300",
     },
     {
+      id: 3,
       name: "Youth League Championship",
       year: "2023",
       winner: "Tiruvalur Young Tigers",
       runnerUp: "Vedaranyam Juniors",
+      thirdPlace: "Mannargudi Youth",
       participants: 20,
-      prize: "₹15,000",
+      description: "Dedicated tournament for young players under 18 years",
+      venue: "Youth Training Center",
+      date: "2023-08-10",
       image: "/placeholder.svg?height=200&width=300",
     },
-  ]
+  ])
 
-  const notablePlayers = [
-    {
-      name: "Karthik Selvam",
-      title: "District Captain",
-      achievements: ["State Champion 2023", "Best Raider Award", "3x District Champion"],
-      village: "Thiruthuraipoondi",
-      experience: "8 years",
-      image: "/placeholder.svg?height=150&width=150",
-    },
-    {
-      name: "Priya Lakshmi",
-      title: "Women's Team Captain",
-      achievements: ["State Runner-up 2023", "Best All-rounder", "Youth Mentor"],
-      village: "Mannargudi",
-      experience: "6 years",
-      image: "/placeholder.svg?height=150&width=150",
-    },
-    {
-      name: "Murugan Raja",
-      title: "Veteran Player",
-      achievements: ["Lifetime Achievement", "5x District Champion", "Coach of the Year"],
-      village: "Kodavasal",
-      experience: "15 years",
-      image: "/placeholder.svg?height=150&width=150",
-    },
-    {
-      name: "Divya Bharathi",
-      title: "Rising Star",
-      achievements: ["Youth Champion 2023", "Best Newcomer", "Future Prospect"],
-      village: "Vedaranyam",
-      experience: "2 years",
-      image: "/placeholder.svg?height=150&width=150",
-    },
-  ]
+  // Load achievements from localStorage on component mount
+  useEffect(() => {
+    const savedAchievements = localStorage.getItem("achievements")
+    if (savedAchievements) {
+      const parsedAchievements = JSON.parse(savedAchievements)
+      if (parsedAchievements.length > 0) {
+        setMajorAchievements(parsedAchievements)
+      }
+    }
+
+    const savedTournaments = localStorage.getItem("tournaments")
+    if (savedTournaments) {
+      const parsedTournaments = JSON.parse(savedTournaments)
+      if (parsedTournaments.length > 0) {
+        setTournaments(parsedTournaments)
+      }
+    }
+  }, [])
+
+  // Listen for storage changes and custom events
+  useEffect(() => {
+    const handleAchievementsUpdate = () => {
+      const savedAchievements = localStorage.getItem("achievements")
+      if (savedAchievements) {
+        const parsedAchievements = JSON.parse(savedAchievements)
+        setMajorAchievements(parsedAchievements)
+      }
+    }
+
+    const handleTournamentsUpdate = () => {
+      const savedTournaments = localStorage.getItem("tournaments")
+      if (savedTournaments) {
+        const parsedTournaments = JSON.parse(savedTournaments)
+        setTournaments(parsedTournaments)
+      }
+    }
+
+    window.addEventListener("achievementsUpdated", handleAchievementsUpdate)
+    window.addEventListener("tournamentsUpdated", handleTournamentsUpdate)
+
+    return () => {
+      window.removeEventListener("achievementsUpdated", handleAchievementsUpdate)
+      window.removeEventListener("tournamentsUpdated", handleTournamentsUpdate)
+    }
+  }, [])
+
+  const getIcon = (iconName: string) => {
+    const icons: { [key: string]: any } = {
+      Crown,
+      Star,
+      Award,
+      Medal,
+      Trophy,
+    }
+    return icons[iconName] || Trophy
+  }
 
   const statistics = [
     { label: "Total Championships", value: "25", icon: Trophy },
@@ -153,59 +195,26 @@ export default function AchievementsPage() {
         </div>
       </section>
 
-      {/* Major Achievements */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-6 text-gray-800">Major Achievements</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Landmark accomplishments that define our journey in Atya Patya excellence
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {majorAchievements.map((achievement, index) => (
-              <Card
-                key={index}
-                className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden"
-              >
-                <CardHeader
-                  className={`${achievement.bgColor} group-hover:scale-105 transition-transform duration-300`}
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <achievement.icon className={`h-12 w-12 ${achievement.color}`} />
-                      <div>
-                        <Badge className="mb-2 bg-white text-gray-800">{achievement.year}</Badge>
-                        <CardTitle className="text-xl text-gray-800">{achievement.title}</CardTitle>
-                      </div>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="p-6">
-                  <p className="text-gray-700 mb-4 leading-relaxed">{achievement.description}</p>
-                  <Badge variant="outline" className={`${achievement.color} border-current`}>
-                    {achievement.category}
-                  </Badge>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Tournament Results */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-6 text-gray-800">Recent Tournament Results</h2>
-            <p className="text-xl text-gray-600">Latest championship outcomes and competitive highlights</p>
+          <div className="flex items-center justify-between mb-16">
+            <div className="text-center flex-1">
+              <h2 className="text-4xl font-bold mb-6 text-gray-800">Recent Tournament Results</h2>
+              <p className="text-xl text-gray-600">Latest championship outcomes and competitive highlights</p>
+            </div>
+            <Link href="/tournaments/add">
+              <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-6 py-3 rounded-full transform hover:scale-105 transition-all duration-300">
+                <Plus className="h-5 w-5 mr-2" />
+                Add Tournament
+              </Button>
+            </Link>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {tournaments.map((tournament, index) => (
               <Card
-                key={index}
+                key={tournament.id}
                 className="overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
               >
                 <div className="relative">
@@ -236,8 +245,8 @@ export default function AchievementsPage() {
                       <span className="font-medium text-gray-700">{tournament.runnerUp}</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">Prize Money:</span>
-                      <span className="font-semibold text-green-600">{tournament.prize}</span>
+                      <span className="text-sm text-gray-600">Third Place:</span>
+                      <span className="font-medium text-gray-700">{tournament.thirdPlace}</span>
                     </div>
                   </div>
 
@@ -255,52 +264,56 @@ export default function AchievementsPage() {
         </div>
       </section>
 
-      {/* Notable Players */}
-      <section className="py-20 bg-gradient-to-r from-orange-50 to-red-50">
+      {/* Major Achievements */}
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-6 text-gray-800">Notable Players</h2>
-            <p className="text-xl text-gray-600">Champions and rising stars who represent the spirit of Atya Patya</p>
+          <div className="flex items-center justify-between mb-16">
+            <div className="text-center flex-1">
+              <h2 className="text-4xl font-bold mb-6 text-gray-800">Major Achievements</h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Landmark accomplishments that define our journey in Atya Patya excellence
+              </p>
+            </div>
+            <Link href="/achievements/add">
+              <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-6 py-3 rounded-full transform hover:scale-105 transition-all duration-300">
+                <Plus className="h-5 w-5 mr-2" />
+                Add Achievement
+              </Button>
+            </Link>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {notablePlayers.map((player, index) => (
-              <Card
-                key={index}
-                className="text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-3 group"
-              >
-                <CardHeader className="pb-4">
-                  <div className="relative mx-auto">
-                    <Image
-                      src={player.image || "/placeholder.svg"}
-                      alt={player.name}
-                      width={150}
-                      height={150}
-                      className="w-32 h-32 rounded-full mx-auto mb-4 object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                    <div className="absolute -bottom-2 -right-2 bg-orange-500 text-white p-2 rounded-full">
-                      <Trophy className="h-4 w-4" />
-                    </div>
-                  </div>
-                  <CardTitle className="text-lg text-gray-800">{player.name}</CardTitle>
-                  <p className="text-orange-600 font-medium">{player.title}</p>
-                  <Badge variant="outline" className="text-xs">
-                    {player.village}
-                  </Badge>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <p className="text-sm text-gray-600 mb-4">{player.experience} experience</p>
-                  <div className="space-y-2">
-                    {player.achievements.map((achievement, idx) => (
-                      <div key={idx} className="flex items-center text-xs text-gray-700">
-                        <Star className="h-3 w-3 mr-2 text-yellow-500" />
-                        {achievement}
+          <div
+            className={`grid gap-8 ${majorAchievements.length === 1 ? "md:grid-cols-1 max-w-2xl mx-auto" : majorAchievements.length === 2 ? "md:grid-cols-2" : majorAchievements.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2 lg:grid-cols-3"}`}
+          >
+            {majorAchievements.map((achievement) => {
+              const IconComponent = getIcon(achievement.icon)
+              return (
+                <Card
+                  key={achievement.id}
+                  className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden"
+                >
+                  <CardHeader
+                    className={`${achievement.bgColor} group-hover:scale-105 transition-transform duration-300`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <IconComponent className={`h-12 w-12 ${achievement.color}`} />
+                        <div>
+                          <Badge className="mb-2 bg-white text-gray-800">{achievement.year}</Badge>
+                          <CardTitle className="text-xl text-gray-800">{achievement.title}</CardTitle>
+                        </div>
                       </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                    </div>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <p className="text-gray-700 mb-4 leading-relaxed">{achievement.description}</p>
+                    <Badge variant="outline" className={`${achievement.color} border-current`}>
+                      {achievement.category}
+                    </Badge>
+                  </CardContent>
+                </Card>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -312,22 +325,7 @@ export default function AchievementsPage() {
           <p className="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
             Join the legacy of champions and contribute to the rich tradition of Atya Patya in Tiruvalur
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              variant="secondary"
-              className="bg-white text-orange-600 hover:bg-orange-50 px-8 py-3 rounded-full"
-            >
-              Register for Tournament
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-orange-600 px-8 py-3 rounded-full"
-            >
-              View Tournament Calendar
-            </Button>
-          </div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center"></div>
         </div>
       </section>
     </div>

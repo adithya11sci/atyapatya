@@ -123,57 +123,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Cultural Significance */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-6 text-gray-800">Cultural Significance in Tiruvalur</h2>
-              <p className="text-xl text-gray-600">
-                More than just a game - a celebration of community, tradition, and Tamil heritage
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-6">
-                <Card className="p-6 border-l-4 border-orange-500">
-                  <h3 className="text-xl font-semibold mb-3 text-gray-800">Community Bonding</h3>
-                  <p className="text-gray-700">
-                    Atya Patya serves as a powerful tool for bringing together people from different villages, fostering
-                    unity and friendship across Tiruvalur district.
-                  </p>
-                </Card>
-
-                <Card className="p-6 border-l-4 border-red-500">
-                  <h3 className="text-xl font-semibold mb-3 text-gray-800">Festival Integration</h3>
-                  <p className="text-gray-700">
-                    The game is an integral part of local festivals and celebrations, with major tournaments coinciding
-                    with harvest festivals and religious occasions.
-                  </p>
-                </Card>
-              </div>
-
-              <div className="space-y-6">
-                <Card className="p-6 border-l-4 border-yellow-500">
-                  <h3 className="text-xl font-semibold mb-3 text-gray-800">Youth Development</h3>
-                  <p className="text-gray-700">
-                    The sport plays a crucial role in developing physical fitness, mental toughness, and leadership
-                    qualities among the youth of Tiruvalur.
-                  </p>
-                </Card>
-
-                <Card className="p-6 border-l-4 border-green-500">
-                  <h3 className="text-xl font-semibold mb-3 text-gray-800">Cultural Preservation</h3>
-                  <p className="text-gray-700">
-                    By maintaining and promoting Atya Patya, Tiruvalur district preserves an important aspect of Tamil
-                    cultural heritage for future generations.
-                  </p>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Game Variations */}
       <section className="py-20 bg-gradient-to-r from-orange-50 to-red-50">
