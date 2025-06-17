@@ -393,24 +393,7 @@ export default function AboutPage() {
             traditional sport!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact">
-              <Button
-                size="lg"
-                variant="secondary"
-                className="bg-white text-orange-600 hover:bg-orange-50 px-8 py-3 rounded-full transform hover:scale-105 transition-all duration-300"
-              >
-                Find Local Teams
-              </Button>
-            </Link>
-            <Link href="/achievements">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-orange-600 px-8 py-3 rounded-full transform hover:scale-105 transition-all duration-300"
-              >
-                View Tournaments
-              </Button>
-            </Link>
+            
           </div>
         </div>
       </section>

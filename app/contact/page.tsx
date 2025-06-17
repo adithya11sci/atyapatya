@@ -1,11 +1,44 @@
+"use client"
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
-import { MapPin, Phone, Mail, Clock, Building, MessageSquare, Send } from "lucide-react"
+import { MapPin, Phone, Mail, Clock, Building, MessageSquare, Send, Trophy, Users, Target } from "lucide-react"
 
 export default function ContactPage() {
+  const locations = [
+    {
+      name: "District Sports Office",
+      address: "Tiruvallur Town, Main Road",
+      type: "Administrative",
+      icon: Building,
+      color: "bg-orange-500",
+    },
+    {
+      name: "Central Training Ground",
+      address: "Ponneri Road, Tiruvallur",
+      type: "Training Facility",
+      icon: Target,
+      color: "bg-red-500",
+    },
+    {
+      name: "Community Sports Center",
+      address: "Gummidipoondi, Tiruvallur",
+      type: "Community Hub",
+      icon: Users,
+      color: "bg-yellow-500",
+    },
+    {
+      name: "Tournament Arena",
+      address: "Poonamallee Highway, Tiruvallur",
+      type: "Competition Venue",
+      icon: Trophy,
+      color: "bg-green-500",
+    },
+  ]
+
   return (
     <div className="min-h-screen py-20">
       {/* Hero Section */}
@@ -165,31 +198,62 @@ export default function ContactPage() {
         </div>
       </section>
 
+      
+
       {/* Map Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-6 text-gray-800">Find Us</h2>
-            <p className="text-xl text-gray-600">Locate our office and training facilities in Tiruvalur district</p>
+            <h2 className="text-4xl font-bold mb-6 text-gray-800">Find Us on Map</h2>
+            <p className="text-xl text-gray-600">Interactive map showing all our locations in Tiruvallur district</p>
           </div>
 
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <Card className="overflow-hidden shadow-xl">
               <CardHeader className="bg-gradient-to-r from-orange-500 to-red-500 text-white">
                 <CardTitle className="flex items-center">
                   <MapPin className="h-6 w-6 mr-3" />
-                  Tiruvalur District Sports Complex
+                  Atya Patya Locations - Tiruvallur District
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-0">
-                <div className="relative h-96 bg-gray-200">
-                  {/* Placeholder for interactive map */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-orange-100 to-red-100">
-                    <div className="text-center">
-                      <MapPin className="h-16 w-16 mx-auto mb-4 text-orange-500" />
-                      <p className="text-lg font-semibold text-gray-800">Interactive Map</p>
-                      <p className="text-gray-600">Tiruvalur District Sports Complex</p>
-                      <Button className="mt-4 bg-orange-500 hover:bg-orange-600 text-white">Open in Google Maps</Button>
+                <div className="relative h-[500px] bg-gray-200">
+                  {/* Google Maps Embed with multiple markers for Tiruvallur */}
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248849.84916296526!2d79.63089645!3d13.1186899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5265ea4f7d3361%3A0x6e61a70b6863d433!2sTiruvallur%2C%20Tamil%20Nadu%2C%20India!5e0!3m2!1sen!2sus!4v1703123456789!5m2!1sen!2sus&markers=color:red%7Clabel:A%7C13.1186899,79.9108105&markers=color:blue%7Clabel:B%7C13.1500,79.8500&markers=color:green%7Clabel:C%7C13.0800,79.9500&markers=color:yellow%7Clabel:D%7C13.1300,79.8800"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="rounded-b-lg"
+                  />
+
+                  {/* Location Legend Overlay */}
+                  <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-lg max-w-xs">
+                    <h3 className="font-semibold text-gray-800 mb-3 flex items-center">
+                      <MapPin className="h-4 w-4 mr-2 text-orange-500" />
+                      Our Locations
+                    </h3>
+                    <div className="space-y-2 text-sm">
+                      {locations.map((location, index) => (
+                        <div key={index} className="flex items-center space-x-2">
+                          <div className={`w-3 h-3 rounded-full ${location.color}`}></div>
+                          <span className="text-gray-700 font-medium">{location.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* District Info Overlay */}
+                  <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm rounded-lg p-3 shadow-lg">
+                    <div className="flex items-center space-x-2">
+                      <MapPin className="h-4 w-4 text-orange-500" />
+                      <div className="text-sm">
+                        <p className="font-semibold text-gray-800">Tiruvallur District</p>
+                        <p className="text-gray-600">Tamil Nadu, India</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -199,28 +263,16 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Call to Action */}
+      {/* Quick Actions */}
       <section className="py-20 bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-6 text-white">Ready to Join the Atya Patya Family?</h2>
+          <h2 className="text-4xl font-bold mb-6 text-white">Ready to Visit Us?</h2>
           <p className="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
-            Whether you're a player, coach, or enthusiast, there's a place for you in our community.
+            Choose the location most convenient for you and join the Atya Patya community.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              variant="secondary"
-              className="bg-white text-orange-600 hover:bg-orange-50 px-8 py-3 rounded-full"
-            >
-              Visit Our Office
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-orange-600 px-8 py-3 rounded-full"
-            >
-              Schedule a Call
-            </Button>
+            
+            
           </div>
         </div>
       </section>

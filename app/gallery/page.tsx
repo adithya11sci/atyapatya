@@ -310,29 +310,7 @@ export default function GalleryPage() {
       <section className="py-20 bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-6 text-white">Capture Your Atya Patya Moments</h2>
-          <p className="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
-            Have photos from tournaments or training sessions? Share them with the community!
-          </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact">
-              <Button
-                size="lg"
-                variant="secondary"
-                className="bg-white text-orange-600 hover:bg-orange-50 px-8 py-3 rounded-full transform hover:scale-105 transition-all duration-300"
-              >
-                Submit Photos
-              </Button>
-            </Link>
-            <Link href="/edit">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-orange-600 px-8 py-3 rounded-full transform hover:scale-105 transition-all duration-300"
-              >
-                <Settings className="mr-2 h-4 w-4" />
-                Manage Gallery
-              </Button>
-            </Link>
           </div>
         </div>
       </section>
